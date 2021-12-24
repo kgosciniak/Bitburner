@@ -6,7 +6,6 @@ let facServers = {
     "The-Cave" : "orange",
     "w0r1d_d43m0n" : "red"
 };
-
 let svObj = (name = 'home', depth = 0) => ({ name: name, depth: depth });
 export function getServers(ns) {
     let result = [];
