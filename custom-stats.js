@@ -49,9 +49,9 @@ export async function main(ns) {
             }
             //values.push(ns.getScriptExpGain().toPrecision(5) + '/sec');
             // TODO: Add more neat stuff
-            //headers.push("Karma");
-            //var kval = ns.getPlayer().karma;
-            //values.push(kval);
+            const karma = ns.heart.break();
+            headers.push("Karma");
+            values.push(karma);
             // Now drop it into the placeholder elements
             hook0.innerText = headers.join(" \n");
             hook1.innerText = values.join("\n");
