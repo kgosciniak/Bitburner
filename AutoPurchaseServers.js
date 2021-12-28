@@ -4,7 +4,7 @@ const argsSchema = [
     ['useMoneyPercentage', 100],// ( --useMoney n ) how much n% money from players will be used to upgrade/buy a new server.
     ['maxServersAmount', 25],   // ( --maxAmount n ) buy up to n Servers
     ['namePrefix', 'pserv'],    // ( --namePreFix *any* ) prefix of the servers name
-    ['startAtRam', 32],         // ( --startAt n ) starting with n GB RAM of purchasing servers
+    ['startAtRam', 1048576],    // ( --startAt n ) starting with n GB RAM of purchasing servers
     ['maxToRam', 1048576]       // ( -- maxToRam n ) will buy to n GB of ram (i advice about 32TB, because 25 Servers with 4096GB sure cost alot 😂)
 ]
 
@@ -87,7 +87,7 @@ export async function main(ns) {
             if (server == undefined && (pservers[isZero(i) - 1] != undefined || i == 0)) {
                 let cost = ns.getPurchasedServerCost(option.startAtRam)
                 if (player.money * buyPerc > cost) {
-                    var t = ns.purchaseServer(option.namePrefix + "-" + option.startAtRam + "GB", option.startAtRam) // example of a "new" bought : pserv-0-32GB
+                    var t = ns.purchaseServer(option.namePrefix + "-" + i + "-" + ns.nFormat(option.startAtRam * 1000000000, '0b'), option.startAtRam) // example of a "new" bought : pserv-0-32GB
                     if (t == "") {
                         ns.print("WARNING: Failed to buy a new Server, you may not have enough money")
                     }
@@ -96,7 +96,7 @@ export async function main(ns) {
             else {
                 if (server == undefined) { }
                 else {
-                    let nextRam = currentRam * 2
+                    var nextRam = currentRam * 2
                     let ramSuffix = byteFormat[0]
                     if (nextRam >= 1024) {
                         ramSuffix = byteFormat[logBaseValue(1024, nextRam)]
@@ -112,7 +112,7 @@ export async function main(ns) {
                                 ns.killall(server)
                             }
                             if (t == true) {
-                                var u = ns.purchaseServer(option.namePrefix + "-" + nextRam + ramSuffix, currentRam * 2)
+                                var u = ns.purchaseServer(option.namePrefix + "-" + i + "-" + ns.nFormat(currentRam * 2000000000, '0b'), currentRam * 2)
                                 if (u == "") {
                                     ns.print("WARNING: Failed to buy an upgrade for Server" + server + ", you may not had enough money" +
                                         "\nIt will get rebought at 32GB and upgraded again")
