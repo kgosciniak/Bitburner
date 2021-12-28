@@ -1,0 +1,38 @@
+// Array of all servers that don't need any ports opened
+// to gain root access. These have 16 GB of RAM
+var serversPriva = ["pserv-0-1PB",
+					"pserv-1-1PB",
+					"pserv-2-1PB",
+					"pserv-3-1PB",
+					"pserv-4-1PB",
+					"pserv-5-1PB",
+					"pserv-6-1PB",
+					"pserv-7-1PB",
+					"pserv-8-1PB",
+					"pserv-9-1PB",
+					"pserv-10-1PB",
+					"pserv-11-1PB",
+					"pserv-12-1PB",
+					"pserv-13-1PB",
+					"pserv-14-1PB",
+					"pserv-15-1PB",
+					"pserv-16-1PB",
+					"pserv-17-1PB",
+					"pserv-18-1PB",
+					"pserv-19-1PB",
+					"pserv-20-1PB",
+					"pserv-21-1PB",
+					"pserv-22-1PB",
+					"pserv-23-1PB",
+					"pserv-24-1PB"];
+
+// Copy our scripts onto each Provate server.
+for (var i = 0; i < serversPriva.length; ++i) {
+    var serv = serversPriva[i];
+
+    scp("/newserver/grow.js", serv);
+	scp("/newserver/weaken.js", serv);
+	scp("/newserver/hack.js", serv);
+	scp("/newserver/OP.ns", serv);
+	exec("/newserver/OP.ns", serv, 1, "megacorp");
+}
